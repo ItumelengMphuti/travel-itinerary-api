@@ -15,9 +15,10 @@ class BudgetViewSet(viewsets.ModelViewSet):
     ]
 
     def get_queryset(self):
-        return Budget.objects.filter(
-            user=self.request.user
-        )
+        return Budget.objects.select_related(
+            "itinerary",
+            "user",
+        ).filter(user=self.request.user)
 
     def perform_create(self, serializer):
         serializer.save(

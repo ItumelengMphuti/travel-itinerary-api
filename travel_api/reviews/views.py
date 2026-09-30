@@ -16,9 +16,10 @@ class ReviewViewSet(viewsets.ModelViewSet):
     ]
 
     def get_queryset(self):
-        return Review.objects.filter(
-            user=self.request.user
-        )
+        return Review.objects.select_related(
+            "destination",
+            "user",
+        ).filter(user=self.request.user)
 
     def perform_create(self, serializer):
         serializer.save(

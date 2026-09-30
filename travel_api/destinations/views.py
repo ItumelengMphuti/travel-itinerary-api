@@ -9,7 +9,7 @@ from .serializers import CategorySerializer, DestinationSerializer
 
 
 class CategoryViewSet(viewsets.ModelViewSet):
-    queryset = Category.objects.all()
+    queryset = Destination.objects.select_related("category").all()
     serializer_class = CategorySerializer
 
 

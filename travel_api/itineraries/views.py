@@ -23,6 +23,9 @@ class ItineraryViewSet(viewsets.ModelViewSet):
         return Itinerary.objects.filter(
             models.Q(user=self.request.user)
             | models.Q(participants__user=self.request.user)
+        ).prefetch_related(
+            "destinations",
+            "participants",
         ).distinct()
 
     def perform_create(self, serializer):
