@@ -42,14 +42,10 @@ class BudgetSerializer(serializers.ModelSerializer):
         ]
 
         if any(cost < 0 for cost in costs):
-            raise serializers.ValidationError(
-                "Budget costs cannot be negative."
-            )
+            raise serializers.ValidationError("Budget costs cannot be negative.")
 
         if total_budget < 0:
-            raise serializers.ValidationError(
-                "Total budget cannot be negative."
-            )
+            raise serializers.ValidationError("Total budget cannot be negative.")
 
         if sum(costs) > total_budget:
             raise serializers.ValidationError(
@@ -57,6 +53,8 @@ class BudgetSerializer(serializers.ModelSerializer):
             )
 
         return data
+
+
 class TripExpenseSerializer(serializers.ModelSerializer):
     class Meta:
         model = TripExpense
@@ -76,8 +74,6 @@ class TripExpenseSerializer(serializers.ModelSerializer):
 
     def validate_amount(self, value):
         if value < 0:
-            raise serializers.ValidationError(
-                "Expense amount cannot be negative."
-            )
+            raise serializers.ValidationError("Expense amount cannot be negative.")
 
         return value

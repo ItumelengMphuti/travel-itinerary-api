@@ -5,7 +5,6 @@ from rest_framework.test import APITestCase
 
 from .models import Itinerary, ItineraryParticipant
 
-
 User = get_user_model()
 
 
@@ -167,11 +166,7 @@ class ItineraryAPITestCase(APITestCase):
             status.HTTP_204_NO_CONTENT,
         )
 
-        self.assertFalse(
-            Itinerary.objects.filter(
-                id=self.itinerary.id
-            ).exists()
-        )
+        self.assertFalse(Itinerary.objects.filter(id=self.itinerary.id).exists())
 
     def test_other_user_cannot_modify_itinerary(self):
         self.client.force_authenticate(user=self.other_user)

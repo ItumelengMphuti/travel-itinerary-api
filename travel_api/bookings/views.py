@@ -41,19 +41,13 @@ class AccommodationBookingViewSet(viewsets.ModelViewSet):
     ordering = ["check_in"]
 
     def get_queryset(self):
-        return (
-            AccommodationBooking.objects
-            .select_related(
-                "itinerary",
-                "user",
-            )
-            .filter(user=self.request.user)
-        )
+        return AccommodationBooking.objects.select_related(
+            "itinerary",
+            "user",
+        ).filter(user=self.request.user)
 
     def perform_create(self, serializer):
-        serializer.save(
-            user=self.request.user
-        )
+        serializer.save(user=self.request.user)
 
 
 class ActivityBookingViewSet(viewsets.ModelViewSet):
@@ -85,16 +79,10 @@ class ActivityBookingViewSet(viewsets.ModelViewSet):
     ordering = ["activity_date"]
 
     def get_queryset(self):
-        return (
-            ActivityBooking.objects
-            .select_related(
-                "itinerary",
-                "user",
-            )
-            .filter(user=self.request.user)
-        )
+        return ActivityBooking.objects.select_related(
+            "itinerary",
+            "user",
+        ).filter(user=self.request.user)
 
     def perform_create(self, serializer):
-        serializer.save(
-            user=self.request.user
-        )
+        serializer.save(user=self.request.user)

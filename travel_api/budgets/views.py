@@ -18,8 +18,7 @@ class BudgetViewSet(viewsets.ModelViewSet):
 
     def get_queryset(self):
         return (
-            Budget.objects
-            .select_related(
+            Budget.objects.select_related(
                 "itinerary",
                 "user",
             )
@@ -28,9 +27,7 @@ class BudgetViewSet(viewsets.ModelViewSet):
         )
 
     def perform_create(self, serializer):
-        serializer.save(
-            user=self.request.user
-        )
+        serializer.save(user=self.request.user)
 
     @action(detail=True, methods=["get"])
     def summary(self, request, pk=None):
@@ -48,12 +45,15 @@ class BudgetViewSet(viewsets.ModelViewSet):
 
         remaining = budget.total_budget - total_expenses
 
-        return Response({
-            "total_budget": budget.total_budget,
-            "total_expenses": total_expenses,
-            "remaining": remaining,
-        })
-        
+        return Response(
+            {
+                "total_budget": budget.total_budget,
+                "total_expenses": total_expenses,
+                "remaining": remaining,
+            }
+        )
+
+
 class TripExpenseViewSet(viewsets.ModelViewSet):
     serializer_class = TripExpenseSerializer
 
@@ -80,16 +80,10 @@ class TripExpenseViewSet(viewsets.ModelViewSet):
     ordering = ["-expense_date"]
 
     def get_queryset(self):
-        return (
-            TripExpense.objects
-            .select_related(
-                "budget",
-                "user",
-            )
-            .filter(user=self.request.user)
-        )
+        return TripExpense.objects.select_related(
+            "budget",
+            "user",
+        ).filter(user=self.request.user)
 
     def perform_create(self, serializer):
-        serializer.save(
-            user=self.request.user
-        )
+        serializer.save(user=self.request.user)

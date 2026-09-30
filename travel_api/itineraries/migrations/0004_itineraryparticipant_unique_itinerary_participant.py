@@ -7,13 +7,15 @@ from django.db import migrations, models
 class Migration(migrations.Migration):
 
     dependencies = [
-        ('itineraries', '0003_itineraryparticipant'),
+        ("itineraries", "0003_itineraryparticipant"),
         migrations.swappable_dependency(settings.AUTH_USER_MODEL),
     ]
 
     operations = [
         migrations.AddConstraint(
-            model_name='itineraryparticipant',
-            constraint=models.UniqueConstraint(fields=('itinerary', 'user'), name='unique_itinerary_participant'),
+            model_name="itineraryparticipant",
+            constraint=models.UniqueConstraint(
+                fields=("itinerary", "user"), name="unique_itinerary_participant"
+            ),
         ),
     ]

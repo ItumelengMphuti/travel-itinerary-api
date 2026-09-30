@@ -6,14 +6,16 @@ from django.db import migrations, models
 class Migration(migrations.Migration):
 
     dependencies = [
-        ('destinations', '0001_initial'),
-        ('itineraries', '0001_initial'),
+        ("destinations", "0001_initial"),
+        ("itineraries", "0001_initial"),
     ]
 
     operations = [
         migrations.AddField(
-            model_name='itinerary',
-            name='destinations',
-            field=models.ManyToManyField(blank=True, related_name='itineraries', to='destinations.destination'),
+            model_name="itinerary",
+            name="destinations",
+            field=models.ManyToManyField(
+                blank=True, related_name="itineraries", to="destinations.destination"
+            ),
         ),
     ]

@@ -22,14 +22,13 @@ class ReviewViewSet(viewsets.ModelViewSet):
         ).filter(user=self.request.user)
 
     def perform_create(self, serializer):
-        serializer.save(
-            user=self.request.user
-        )
-        
+        serializer.save(user=self.request.user)
+
     filterset_fields = [
-    "destination",
-    "rating",
-]
+        "destination",
+        "rating",
+    ]
+
 
 search_fields = [
     "comment",

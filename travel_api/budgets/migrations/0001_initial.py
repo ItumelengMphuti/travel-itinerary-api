@@ -10,25 +10,62 @@ class Migration(migrations.Migration):
     initial = True
 
     dependencies = [
-        ('itineraries', '0002_itinerary_destinations'),
+        ("itineraries", "0002_itinerary_destinations"),
         migrations.swappable_dependency(settings.AUTH_USER_MODEL),
     ]
 
     operations = [
         migrations.CreateModel(
-            name='Budget',
+            name="Budget",
             fields=[
-                ('id', models.BigAutoField(auto_created=True, primary_key=True, serialize=False, verbose_name='ID')),
-                ('total_budget', models.DecimalField(decimal_places=2, max_digits=10)),
-                ('accommodation_cost', models.DecimalField(decimal_places=2, default=0, max_digits=10)),
-                ('activity_cost', models.DecimalField(decimal_places=2, default=0, max_digits=10)),
-                ('transport_cost', models.DecimalField(decimal_places=2, default=0, max_digits=10)),
-                ('food_cost', models.DecimalField(decimal_places=2, default=0, max_digits=10)),
-                ('other_cost', models.DecimalField(decimal_places=2, default=0, max_digits=10)),
-                ('created_at', models.DateTimeField(auto_now_add=True)),
-                ('updated_at', models.DateTimeField(auto_now=True)),
-                ('itinerary', models.OneToOneField(on_delete=django.db.models.deletion.CASCADE, related_name='budget', to='itineraries.itinerary')),
-                ('user', models.ForeignKey(on_delete=django.db.models.deletion.CASCADE, related_name='budgets', to=settings.AUTH_USER_MODEL)),
+                (
+                    "id",
+                    models.BigAutoField(
+                        auto_created=True,
+                        primary_key=True,
+                        serialize=False,
+                        verbose_name="ID",
+                    ),
+                ),
+                ("total_budget", models.DecimalField(decimal_places=2, max_digits=10)),
+                (
+                    "accommodation_cost",
+                    models.DecimalField(decimal_places=2, default=0, max_digits=10),
+                ),
+                (
+                    "activity_cost",
+                    models.DecimalField(decimal_places=2, default=0, max_digits=10),
+                ),
+                (
+                    "transport_cost",
+                    models.DecimalField(decimal_places=2, default=0, max_digits=10),
+                ),
+                (
+                    "food_cost",
+                    models.DecimalField(decimal_places=2, default=0, max_digits=10),
+                ),
+                (
+                    "other_cost",
+                    models.DecimalField(decimal_places=2, default=0, max_digits=10),
+                ),
+                ("created_at", models.DateTimeField(auto_now_add=True)),
+                ("updated_at", models.DateTimeField(auto_now=True)),
+                (
+                    "itinerary",
+                    models.OneToOneField(
+                        on_delete=django.db.models.deletion.CASCADE,
+                        related_name="budget",
+                        to="itineraries.itinerary",
+                    ),
+                ),
+                (
+                    "user",
+                    models.ForeignKey(
+                        on_delete=django.db.models.deletion.CASCADE,
+                        related_name="budgets",
+                        to=settings.AUTH_USER_MODEL,
+                    ),
+                ),
             ],
         ),
     ]

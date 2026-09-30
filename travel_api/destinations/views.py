@@ -53,11 +53,7 @@ class DestinationViewSet(viewsets.ModelViewSet):
         """
         destination = self.get_object()
 
-        reviews = (
-            Review.objects
-            .filter(destination=destination)
-            .select_related("user")
-        )
+        reviews = Review.objects.filter(destination=destination).select_related("user")
 
         data = [
             {
@@ -121,11 +117,9 @@ def popular_destinations(request):
         GET /api/v1/destinations/popular/
     """
 
-    destinations = (
-        Destination.objects
-        .filter(is_active=True)
-        .order_by("-average_rating")[:10]
-    )
+    destinations = Destination.objects.filter(is_active=True).order_by(
+        "-average_rating"
+    )[:10]
 
     serializer = DestinationSerializer(destinations, many=True)
 
@@ -147,7 +141,9 @@ def destination_statistics(request):
         average_rating=Avg("average_rating"),
     )
 
-    return Response({
-        "total_destinations": statistics["total_destinations"],
-        "average_rating": statistics["average_rating"] or 0,
-    })
+    return Response(
+        {
+            "total_destinations": statistics["total_destinations"],
+            "average_rating": statistics["average_rating"] or 0,
+        }
+    )

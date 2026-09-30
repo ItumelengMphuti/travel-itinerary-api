@@ -73,9 +73,7 @@ class Budget(models.Model):
             raise ValidationError("Budget costs cannot be negative.")
 
         if sum(costs) > self.total_budget:
-            raise ValidationError(
-                "Total expenses cannot exceed the total budget."
-            )
+            raise ValidationError("Total expenses cannot exceed the total budget.")
 
     def __str__(self):
         return f"{self.itinerary.title} Budget"

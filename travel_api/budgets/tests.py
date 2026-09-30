@@ -7,7 +7,6 @@ from itineraries.models import Itinerary
 
 from .models import Budget
 
-
 User = get_user_model()
 
 
@@ -106,9 +105,7 @@ class BudgetAPITestCase(APITestCase):
             other_cost="500.00",
         )
 
-        response = self.client.get(
-            "/api/budgets/"
-        )
+        response = self.client.get("/api/budgets/")
 
         self.assertEqual(
             response.status_code,

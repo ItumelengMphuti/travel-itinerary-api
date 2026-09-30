@@ -22,30 +22,21 @@ class UserRegistrationSerializer(serializers.ModelSerializer):
             "budget_preference",
         ]
         extra_kwargs = {
-            "username": {
-                "help_text": "Unique username for the account."
-            },
-            "email": {
-                "help_text": "User's email address."
-            },
+            "username": {"help_text": "Unique username for the account."},
+            "email": {"help_text": "User's email address."},
             "travel_style": {
                 "help_text": "Preferred travel style, such as adventure or relaxation."
             },
             "preferred_destination": {
                 "help_text": "Destination the user is interested in visiting."
             },
-            "budget_preference": {
-                "help_text": "Preferred travel budget."
-            },
+            "budget_preference": {"help_text": "Preferred travel budget."},
         }
 
     def create(self, validated_data):
         password = validated_data.pop("password")
 
-        user = User.objects.create_user(
-            password=password,
-            **validated_data
-        )
+        user = User.objects.create_user(password=password, **validated_data)
 
         return user
 
@@ -80,18 +71,14 @@ class PasswordChangeSerializer(serializers.Serializer):
         user = self.context["request"].user
 
         if not user.check_password(value):
-            raise serializers.ValidationError(
-                "Current password is incorrect."
-            )
+            raise serializers.ValidationError("Current password is incorrect.")
 
         return value
 
     def save(self):
         user = self.context["request"].user
 
-        user.set_password(
-            self.validated_data["new_password"]
-        )
+        user.set_password(self.validated_data["new_password"])
 
         user.save()
 

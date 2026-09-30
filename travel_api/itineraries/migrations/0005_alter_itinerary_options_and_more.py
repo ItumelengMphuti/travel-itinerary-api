@@ -7,48 +7,61 @@ from django.db import migrations, models
 class Migration(migrations.Migration):
 
     dependencies = [
-        ('destinations', '0001_initial'),
-        ('itineraries', '0004_itineraryparticipant_unique_itinerary_participant'),
+        ("destinations", "0001_initial"),
+        ("itineraries", "0004_itineraryparticipant_unique_itinerary_participant"),
         migrations.swappable_dependency(settings.AUTH_USER_MODEL),
     ]
 
     operations = [
         migrations.AlterModelOptions(
-            name='itinerary',
-            options={'ordering': ['start_date']},
+            name="itinerary",
+            options={"ordering": ["start_date"]},
         ),
         migrations.AlterModelOptions(
-            name='itineraryparticipant',
-            options={'ordering': ['-joined_at']},
+            name="itineraryparticipant",
+            options={"ordering": ["-joined_at"]},
         ),
         migrations.AddField(
-            model_name='itinerary',
-            name='participants_users',
-            field=models.ManyToManyField(blank=True, related_name='collaborative_itineraries', through='itineraries.ItineraryParticipant', to=settings.AUTH_USER_MODEL),
+            model_name="itinerary",
+            name="participants_users",
+            field=models.ManyToManyField(
+                blank=True,
+                related_name="collaborative_itineraries",
+                through="itineraries.ItineraryParticipant",
+                to=settings.AUTH_USER_MODEL,
+            ),
         ),
         migrations.AddField(
-            model_name='itineraryparticipant',
-            name='role',
-            field=models.CharField(choices=[('editor', 'Editor'), ('viewer', 'Viewer')], default='viewer', max_length=20),
+            model_name="itineraryparticipant",
+            name="role",
+            field=models.CharField(
+                choices=[("editor", "Editor"), ("viewer", "Viewer")],
+                default="viewer",
+                max_length=20,
+            ),
         ),
         migrations.AddIndex(
-            model_name='itinerary',
-            index=models.Index(fields=['user'], name='itineraries_user_id_56177f_idx'),
+            model_name="itinerary",
+            index=models.Index(fields=["user"], name="itineraries_user_id_56177f_idx"),
         ),
         migrations.AddIndex(
-            model_name='itinerary',
-            index=models.Index(fields=['start_date'], name='itineraries_start_d_801dda_idx'),
+            model_name="itinerary",
+            index=models.Index(
+                fields=["start_date"], name="itineraries_start_d_801dda_idx"
+            ),
         ),
         migrations.AddIndex(
-            model_name='itinerary',
-            index=models.Index(fields=['status'], name='itineraries_status_194214_idx'),
+            model_name="itinerary",
+            index=models.Index(fields=["status"], name="itineraries_status_194214_idx"),
         ),
         migrations.AddIndex(
-            model_name='itineraryparticipant',
-            index=models.Index(fields=['itinerary', 'user'], name='itineraries_itinera_96ed45_idx'),
+            model_name="itineraryparticipant",
+            index=models.Index(
+                fields=["itinerary", "user"], name="itineraries_itinera_96ed45_idx"
+            ),
         ),
         migrations.AddIndex(
-            model_name='itineraryparticipant',
-            index=models.Index(fields=['role'], name='itineraries_role_6fa1fd_idx'),
+            model_name="itineraryparticipant",
+            index=models.Index(fields=["role"], name="itineraries_role_6fa1fd_idx"),
         ),
     ]

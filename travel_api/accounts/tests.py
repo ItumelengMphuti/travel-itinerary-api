@@ -46,11 +46,7 @@ class AccountAPITestCase(APITestCase):
             status.HTTP_201_CREATED,
         )
 
-        self.assertTrue(
-            User.objects.filter(
-                username="newuser"
-            ).exists()
-        )
+        self.assertTrue(User.objects.filter(username="newuser").exists())
 
     def test_registration_requires_password(self):
         data = {
@@ -150,7 +146,8 @@ class AccountAPITestCase(APITestCase):
         )
 
         self.assertIn("access", response.data)
-        
+
+
 class PermissionTests(TestCase):
 
     def setUp(self):

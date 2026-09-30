@@ -49,9 +49,7 @@ class AccommodationBooking(models.Model):
 
     def clean(self):
         if self.check_out <= self.check_in:
-            raise ValidationError(
-                "Check-out date must be after check-in date."
-            )
+            raise ValidationError("Check-out date must be after check-in date.")
 
         if self.price < 0:
             raise ValidationError("Price cannot be negative.")

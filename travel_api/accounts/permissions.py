@@ -35,9 +35,7 @@ class IsItineraryParticipant(BasePermission):
 
         return (
             itinerary.user == request.user
-            or itinerary.participants.filter(
-                user=request.user
-            ).exists()
+            or itinerary.participants.filter(user=request.user).exists()
         )
 
 
@@ -55,6 +53,4 @@ class IsOwnerOrParticipant(BasePermission):
         if itinerary.user == request.user:
             return True
 
-        return itinerary.participants.filter(
-            user=request.user
-        ).exists()
+        return itinerary.participants.filter(user=request.user).exists()

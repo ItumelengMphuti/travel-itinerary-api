@@ -20,17 +20,11 @@ class Review(models.Model):
 
     rating = models.PositiveIntegerField()
 
-    comment = models.TextField(
-        blank=True
-    )
+    comment = models.TextField(blank=True)
 
-    created_at = models.DateTimeField(
-        auto_now_add=True
-    )
+    created_at = models.DateTimeField(auto_now_add=True)
 
-    updated_at = models.DateTimeField(
-        auto_now=True
-    )
+    updated_at = models.DateTimeField(auto_now=True)
 
     def __str__(self):
         return f"{self.destination.name} - {self.rating}/5"

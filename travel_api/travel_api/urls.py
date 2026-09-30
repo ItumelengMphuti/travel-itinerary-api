@@ -12,10 +12,8 @@ from drf_spectacular.views import (
     SpectacularSwaggerView,
 )
 
-
 urlpatterns = [
     path("admin/", admin.site.urls),
-
     # API documentation
     path("api/schema/", SpectacularAPIView.as_view(), name="schema"),
     path(
@@ -23,16 +21,13 @@ urlpatterns = [
         SpectacularSwaggerView.as_view(url_name="schema"),
         name="swagger-ui",
     ),
-    
     path(
         "api/redoc/",
         SpectacularRedocView.as_view(url_name="schema"),
         name="redoc",
     ),
-
     # Authentication
     path("api/auth/", include("accounts.urls")),
-
     # JWT
     path(
         "api/auth/token/",
@@ -44,14 +39,12 @@ urlpatterns = [
         TokenRefreshView.as_view(),
         name="token_refresh",
     ),
-
     # API v1
     path("api/v1/destinations/", include("destinations.urls")),
     path("api/v1/", include("itineraries.urls")),
     path("api/v1/", include("bookings.urls")),
     path("api/v1/", include("budgets.urls")),
     path("api/v1/", include("reviews.urls")),
-
     # Backwards-compatible API routes
     path("api/destinations/", include("destinations.urls")),
     path("api/", include("itineraries.urls")),

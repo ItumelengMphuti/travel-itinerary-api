@@ -5,7 +5,6 @@ from rest_framework.test import APITestCase
 
 from .models import Category, Destination
 
-
 User = get_user_model()
 
 
@@ -33,9 +32,7 @@ class DestinationAPITestCase(APITestCase):
         )
 
     def test_list_destinations(self):
-        response = self.client.get(
-            "/api/destinations/destinations/"
-        )
+        response = self.client.get("/api/destinations/destinations/")
 
         self.assertEqual(
             response.status_code,
@@ -89,9 +86,7 @@ class DestinationAPITestCase(APITestCase):
         )
 
     def test_search_destinations(self):
-        response = self.client.get(
-            "/api/destinations/destinations/?search=Cape"
-        )
+        response = self.client.get("/api/destinations/destinations/?search=Cape")
 
         self.assertEqual(
             response.status_code,
@@ -121,9 +116,7 @@ class DestinationAPITestCase(APITestCase):
     def test_unauthenticated_user_cannot_access_destinations(self):
         self.client.force_authenticate(user=None)
 
-        response = self.client.get(
-            "/api/destinations/destinations/"
-        )
+        response = self.client.get("/api/destinations/destinations/")
 
         self.assertEqual(
             response.status_code,

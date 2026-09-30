@@ -10,38 +10,82 @@ class Migration(migrations.Migration):
     initial = True
 
     dependencies = [
-        ('itineraries', '0002_itinerary_destinations'),
+        ("itineraries", "0002_itinerary_destinations"),
         migrations.swappable_dependency(settings.AUTH_USER_MODEL),
     ]
 
     operations = [
         migrations.CreateModel(
-            name='AccommodationBooking',
+            name="AccommodationBooking",
             fields=[
-                ('id', models.BigAutoField(auto_created=True, primary_key=True, serialize=False, verbose_name='ID')),
-                ('name', models.CharField(max_length=200)),
-                ('location', models.CharField(max_length=200)),
-                ('check_in', models.DateField()),
-                ('check_out', models.DateField()),
-                ('booking_reference', models.CharField(blank=True, max_length=100)),
-                ('price', models.DecimalField(decimal_places=2, max_digits=10)),
-                ('created_at', models.DateTimeField(auto_now_add=True)),
-                ('itinerary', models.ForeignKey(on_delete=django.db.models.deletion.CASCADE, related_name='accommodation_bookings', to='itineraries.itinerary')),
-                ('user', models.ForeignKey(on_delete=django.db.models.deletion.CASCADE, related_name='accommodation_bookings', to=settings.AUTH_USER_MODEL)),
+                (
+                    "id",
+                    models.BigAutoField(
+                        auto_created=True,
+                        primary_key=True,
+                        serialize=False,
+                        verbose_name="ID",
+                    ),
+                ),
+                ("name", models.CharField(max_length=200)),
+                ("location", models.CharField(max_length=200)),
+                ("check_in", models.DateField()),
+                ("check_out", models.DateField()),
+                ("booking_reference", models.CharField(blank=True, max_length=100)),
+                ("price", models.DecimalField(decimal_places=2, max_digits=10)),
+                ("created_at", models.DateTimeField(auto_now_add=True)),
+                (
+                    "itinerary",
+                    models.ForeignKey(
+                        on_delete=django.db.models.deletion.CASCADE,
+                        related_name="accommodation_bookings",
+                        to="itineraries.itinerary",
+                    ),
+                ),
+                (
+                    "user",
+                    models.ForeignKey(
+                        on_delete=django.db.models.deletion.CASCADE,
+                        related_name="accommodation_bookings",
+                        to=settings.AUTH_USER_MODEL,
+                    ),
+                ),
             ],
         ),
         migrations.CreateModel(
-            name='ActivityBooking',
+            name="ActivityBooking",
             fields=[
-                ('id', models.BigAutoField(auto_created=True, primary_key=True, serialize=False, verbose_name='ID')),
-                ('name', models.CharField(max_length=200)),
-                ('location', models.CharField(max_length=200)),
-                ('activity_date', models.DateField()),
-                ('booking_reference', models.CharField(blank=True, max_length=100)),
-                ('price', models.DecimalField(decimal_places=2, max_digits=10)),
-                ('created_at', models.DateTimeField(auto_now_add=True)),
-                ('itinerary', models.ForeignKey(on_delete=django.db.models.deletion.CASCADE, related_name='activity_bookings', to='itineraries.itinerary')),
-                ('user', models.ForeignKey(on_delete=django.db.models.deletion.CASCADE, related_name='activity_bookings', to=settings.AUTH_USER_MODEL)),
+                (
+                    "id",
+                    models.BigAutoField(
+                        auto_created=True,
+                        primary_key=True,
+                        serialize=False,
+                        verbose_name="ID",
+                    ),
+                ),
+                ("name", models.CharField(max_length=200)),
+                ("location", models.CharField(max_length=200)),
+                ("activity_date", models.DateField()),
+                ("booking_reference", models.CharField(blank=True, max_length=100)),
+                ("price", models.DecimalField(decimal_places=2, max_digits=10)),
+                ("created_at", models.DateTimeField(auto_now_add=True)),
+                (
+                    "itinerary",
+                    models.ForeignKey(
+                        on_delete=django.db.models.deletion.CASCADE,
+                        related_name="activity_bookings",
+                        to="itineraries.itinerary",
+                    ),
+                ),
+                (
+                    "user",
+                    models.ForeignKey(
+                        on_delete=django.db.models.deletion.CASCADE,
+                        related_name="activity_bookings",
+                        to=settings.AUTH_USER_MODEL,
+                    ),
+                ),
             ],
         ),
     ]

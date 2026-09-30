@@ -7,52 +7,76 @@ from django.db import migrations, models
 class Migration(migrations.Migration):
 
     dependencies = [
-        ('bookings', '0001_initial'),
-        ('itineraries', '0004_itineraryparticipant_unique_itinerary_participant'),
+        ("bookings", "0001_initial"),
+        ("itineraries", "0004_itineraryparticipant_unique_itinerary_participant"),
         migrations.swappable_dependency(settings.AUTH_USER_MODEL),
     ]
 
     operations = [
         migrations.AlterModelOptions(
-            name='accommodationbooking',
-            options={'ordering': ['check_in']},
+            name="accommodationbooking",
+            options={"ordering": ["check_in"]},
         ),
         migrations.AlterModelOptions(
-            name='activitybooking',
-            options={'ordering': ['activity_date']},
+            name="activitybooking",
+            options={"ordering": ["activity_date"]},
         ),
         migrations.AddField(
-            model_name='accommodationbooking',
-            name='status',
-            field=models.CharField(choices=[('pending', 'Pending'), ('confirmed', 'Confirmed'), ('cancelled', 'Cancelled')], default='pending', max_length=20),
+            model_name="accommodationbooking",
+            name="status",
+            field=models.CharField(
+                choices=[
+                    ("pending", "Pending"),
+                    ("confirmed", "Confirmed"),
+                    ("cancelled", "Cancelled"),
+                ],
+                default="pending",
+                max_length=20,
+            ),
         ),
         migrations.AddField(
-            model_name='activitybooking',
-            name='status',
-            field=models.CharField(choices=[('pending', 'Pending'), ('confirmed', 'Confirmed'), ('cancelled', 'Cancelled')], default='pending', max_length=20),
+            model_name="activitybooking",
+            name="status",
+            field=models.CharField(
+                choices=[
+                    ("pending", "Pending"),
+                    ("confirmed", "Confirmed"),
+                    ("cancelled", "Cancelled"),
+                ],
+                default="pending",
+                max_length=20,
+            ),
         ),
         migrations.AddIndex(
-            model_name='accommodationbooking',
-            index=models.Index(fields=['itinerary'], name='bookings_ac_itinera_def601_idx'),
+            model_name="accommodationbooking",
+            index=models.Index(
+                fields=["itinerary"], name="bookings_ac_itinera_def601_idx"
+            ),
         ),
         migrations.AddIndex(
-            model_name='accommodationbooking',
-            index=models.Index(fields=['user'], name='bookings_ac_user_id_62ec92_idx'),
+            model_name="accommodationbooking",
+            index=models.Index(fields=["user"], name="bookings_ac_user_id_62ec92_idx"),
         ),
         migrations.AddIndex(
-            model_name='accommodationbooking',
-            index=models.Index(fields=['check_in'], name='bookings_ac_check_i_ed2016_idx'),
+            model_name="accommodationbooking",
+            index=models.Index(
+                fields=["check_in"], name="bookings_ac_check_i_ed2016_idx"
+            ),
         ),
         migrations.AddIndex(
-            model_name='activitybooking',
-            index=models.Index(fields=['itinerary'], name='bookings_ac_itinera_e239f2_idx'),
+            model_name="activitybooking",
+            index=models.Index(
+                fields=["itinerary"], name="bookings_ac_itinera_e239f2_idx"
+            ),
         ),
         migrations.AddIndex(
-            model_name='activitybooking',
-            index=models.Index(fields=['user'], name='bookings_ac_user_id_3dd6aa_idx'),
+            model_name="activitybooking",
+            index=models.Index(fields=["user"], name="bookings_ac_user_id_3dd6aa_idx"),
         ),
         migrations.AddIndex(
-            model_name='activitybooking',
-            index=models.Index(fields=['activity_date'], name='bookings_ac_activit_f46640_idx'),
+            model_name="activitybooking",
+            index=models.Index(
+                fields=["activity_date"], name="bookings_ac_activit_f46640_idx"
+            ),
         ),
     ]

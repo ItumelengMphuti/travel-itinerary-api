@@ -40,8 +40,7 @@ class ItineraryViewSet(viewsets.ModelViewSet):
 
     def get_queryset(self):
         return (
-            Itinerary.objects
-            .filter(
+            Itinerary.objects.filter(
                 models.Q(user=self.request.user)
                 | models.Q(participants__user=self.request.user)
             )
@@ -60,25 +59,23 @@ class ItineraryViewSet(viewsets.ModelViewSet):
         """Return basic information that can be shared about an itinerary."""
         itinerary = self.get_object()
 
-        return Response({
-            "id": itinerary.id,
-            "title": itinerary.title,
-            "description": itinerary.description,
-            "start_date": itinerary.start_date,
-            "end_date": itinerary.end_date,
-            "status": itinerary.status,
-        })
+        return Response(
+            {
+                "id": itinerary.id,
+                "title": itinerary.title,
+                "description": itinerary.description,
+                "start_date": itinerary.start_date,
+                "end_date": itinerary.end_date,
+                "status": itinerary.status,
+            }
+        )
 
     @action(detail=True, methods=["get"])
     def participants(self, request, pk=None):
         """Return the users participating in an itinerary."""
         itinerary = self.get_object()
 
-        participants = (
-            itinerary.participants
-            .select_related("user")
-            .all()
-        )
+        participants = itinerary.participants.select_related("user").all()
 
         data = [
             {
@@ -111,10 +108,13 @@ class ItineraryViewSet(viewsets.ModelViewSet):
         itinerary.cover_image = image
         itinerary.save(update_fields=["cover_image"])
 
-        return Response({
-            "message": "Cover image uploaded successfully.",
-            "cover_image": itinerary.cover_image.url,
-        })
+        return Response(
+            {
+                "message": "Cover image uploaded successfully.",
+                "cover_image": itinerary.cover_image.url,
+            }
+        )
+
 
 class ItineraryParticipantViewSet(viewsets.ModelViewSet):
     serializer_class = ItineraryParticipantSerializer
@@ -123,11 +123,7 @@ class ItineraryParticipantViewSet(viewsets.ModelViewSet):
     ]
 
     def get_queryset(self):
-        return ItineraryParticipant.objects.filter(
-            itinerary__user=self.request.user
-        )
+        return ItineraryParticipant.objects.filter(itinerary__user=self.request.user)
 
     def perform_create(self, serializer):
-        serializer.save(
-            user=self.request.user
-        )
+        serializer.save(user=self.request.user)

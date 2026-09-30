@@ -7,7 +7,6 @@ from destinations.models import Category, Destination
 
 from .models import Review
 
-
 User = get_user_model()
 
 
@@ -101,9 +100,7 @@ class ReviewAPITestCase(APITestCase):
             comment="Excellent!",
         )
 
-        response = self.client.get(
-            "/api/reviews/"
-        )
+        response = self.client.get("/api/reviews/")
 
         self.assertEqual(
             response.status_code,

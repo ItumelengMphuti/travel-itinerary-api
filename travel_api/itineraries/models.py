@@ -23,7 +23,7 @@ class Itinerary(models.Model):
         blank=True,
         null=True,
     )
-    
+
     start_date = models.DateField()
     end_date = models.DateField()
     status = models.CharField(
@@ -58,9 +58,7 @@ class Itinerary(models.Model):
 
     def clean(self):
         if self.end_date < self.start_date:
-            raise ValidationError(
-                "End date cannot be before start date."
-            )
+            raise ValidationError("End date cannot be before start date.")
 
     def __str__(self):
         return self.title

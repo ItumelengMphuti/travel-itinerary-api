@@ -7,7 +7,6 @@ from itineraries.models import Itinerary
 
 from .models import AccommodationBooking, ActivityBooking
 
-
 User = get_user_model()
 
 
@@ -90,9 +89,7 @@ class BookingAPITestCase(APITestCase):
             price="5000.00",
         )
 
-        response = self.client.get(
-            "/api/accommodations/"
-        )
+        response = self.client.get("/api/accommodations/")
 
         self.assertEqual(
             response.status_code,
@@ -140,9 +137,7 @@ class BookingAPITestCase(APITestCase):
             price="800.00",
         )
 
-        response = self.client.get(
-            "/api/activities/"
-        )
+        response = self.client.get("/api/activities/")
 
         self.assertEqual(
             response.status_code,
