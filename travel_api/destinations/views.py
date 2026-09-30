@@ -16,9 +16,28 @@ class CategoryViewSet(viewsets.ModelViewSet):
 class DestinationViewSet(viewsets.ModelViewSet):
     queryset = Destination.objects.all()
     serializer_class = DestinationSerializer
-    filterset_fields = ["country", "city", "category", "is_active"]
-    search_fields = ["name", "country", "city", "description"]
-    ordering_fields = ["name", "country", "average_rating", "created_at"]
+
+    filterset_fields = [
+        "country",
+        "city",
+        "category",
+        "is_active",
+    ]
+
+    search_fields = [
+        "name",
+        "country",
+        "city",
+        "description",
+    ]
+
+    ordering_fields = [
+        "name",
+        "country",
+        "average_rating",
+        "created_at",
+    ]
+
     ordering = ["name"]
 
 
