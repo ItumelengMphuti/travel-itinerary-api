@@ -56,4 +56,9 @@ urlpatterns = [
     "api/",
     include("bookings.urls"),
     ),
+    
+    path(
+    "api/",
+    include("budgets.urls"),
+    ),
 ]
