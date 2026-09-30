@@ -25,3 +25,21 @@ class ReviewViewSet(viewsets.ModelViewSet):
         serializer.save(
             user=self.request.user
         )
+        
+    filterset_fields = [
+    "destination",
+    "rating",
+]
+
+search_fields = [
+    "comment",
+    "destination__name",
+]
+
+ordering_fields = [
+    "rating",
+    "created_at",
+    "updated_at",
+]
+
+ordering = ["-created_at"]

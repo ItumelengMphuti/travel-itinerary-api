@@ -1,6 +1,6 @@
 from rest_framework import serializers
 
-from .models import Budget
+from .models import Budget, TripExpense
 
 
 class BudgetSerializer(serializers.ModelSerializer):
@@ -57,3 +57,27 @@ class BudgetSerializer(serializers.ModelSerializer):
             )
 
         return data
+class TripExpenseSerializer(serializers.ModelSerializer):
+    class Meta:
+        model = TripExpense
+        fields = [
+            "id",
+            "budget",
+            "user",
+            "description",
+            "category",
+            "amount",
+            "expense_date",
+        ]
+        read_only_fields = [
+            "id",
+            "user",
+        ]
+
+    def validate_amount(self, value):
+        if value < 0:
+            raise serializers.ValidationError(
+                "Expense amount cannot be negative."
+            )
+
+        return value

@@ -17,8 +17,7 @@ router.register(
 router.register(
     "participants",
     ItineraryParticipantViewSet,
-    basename="itinerary-participant",
+    basename="participant",
 )
-
 
 urlpatterns = router.urls

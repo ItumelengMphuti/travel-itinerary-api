@@ -6,6 +6,16 @@ from .models import Itinerary, ItineraryParticipant
 class ItinerarySerializer(serializers.ModelSerializer):
     user = serializers.ReadOnlyField(source="user.username")
 
+    title = serializers.CharField(
+        help_text="Name of the travel itinerary."
+    )
+
+    description = serializers.CharField(
+        required=False,
+        allow_blank=True,
+        help_text="Optional description of the trip."
+    )
+
     class Meta:
         model = Itinerary
         fields = [
@@ -13,6 +23,7 @@ class ItinerarySerializer(serializers.ModelSerializer):
             "user",
             "title",
             "description",
+            "cover_image",
             "start_date",
             "end_date",
             "status",
@@ -20,7 +31,6 @@ class ItinerarySerializer(serializers.ModelSerializer):
             "created_at",
             "updated_at",
         ]
-
         read_only_fields = [
             "id",
             "user",
@@ -35,10 +45,20 @@ class ItinerarySerializer(serializers.ModelSerializer):
             )
 
         return data
-    
+
+
 class ItineraryParticipantSerializer(serializers.ModelSerializer):
     user = serializers.ReadOnlyField(source="user.username")
-    user_id = serializers.IntegerField(write_only=True)
+
+    user_id = serializers.IntegerField(
+        write_only=True,
+        help_text="ID of the user being added to the itinerary."
+    )
+
+    role = serializers.ChoiceField(
+        choices=ItineraryParticipant.Role.choices,
+        help_text="Access level for the participant."
+    )
 
     class Meta:
         model = ItineraryParticipant
@@ -47,6 +67,7 @@ class ItineraryParticipantSerializer(serializers.ModelSerializer):
             "itinerary",
             "user",
             "user_id",
+            "role",
             "joined_at",
         ]
         read_only_fields = [
