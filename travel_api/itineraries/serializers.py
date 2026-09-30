@@ -1,6 +1,6 @@
 from rest_framework import serializers
 
-from .models import Itinerary
+from .models import Itinerary, ItineraryParticipant
 
 
 class ItinerarySerializer(serializers.ModelSerializer):
@@ -35,3 +35,30 @@ class ItinerarySerializer(serializers.ModelSerializer):
             )
 
         return data
+    
+class ItineraryParticipantSerializer(serializers.ModelSerializer):
+    user = serializers.ReadOnlyField(source="user.username")
+    user_id = serializers.IntegerField(write_only=True)
+
+    class Meta:
+        model = ItineraryParticipant
+        fields = [
+            "id",
+            "itinerary",
+            "user",
+            "user_id",
+            "joined_at",
+        ]
+        read_only_fields = [
+            "id",
+            "user",
+            "joined_at",
+        ]
+
+    def create(self, validated_data):
+        user_id = validated_data.pop("user_id")
+
+        return ItineraryParticipant.objects.create(
+            user_id=user_id,
+            **validated_data
+        )

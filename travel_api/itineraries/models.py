@@ -48,3 +48,32 @@ class Itinerary(models.Model):
 
     def __str__(self):
         return self.title
+
+
+class ItineraryParticipant(models.Model):
+    itinerary = models.ForeignKey(
+        Itinerary,
+        on_delete=models.CASCADE,
+        related_name="participants",
+    )
+
+    user = models.ForeignKey(
+        settings.AUTH_USER_MODEL,
+        on_delete=models.CASCADE,
+        related_name="shared_itineraries",
+    )
+
+    joined_at = models.DateTimeField(
+        auto_now_add=True
+    )
+
+    class Meta:
+        constraints = [
+            models.UniqueConstraint(
+                fields=["itinerary", "user"],
+                name="unique_itinerary_participant",
+            )
+        ]
+
+    def __str__(self):
+        return f"{self.user.username} - {self.itinerary.title}"
