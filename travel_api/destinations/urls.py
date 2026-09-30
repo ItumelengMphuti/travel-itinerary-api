@@ -1,10 +1,17 @@
+from django.urls import path
 from rest_framework.routers import DefaultRouter
-from .views import CategoryViewSet, DestinationViewSet
 
+from .views import (
+    CategoryViewSet,
+    DestinationViewSet,
+    recommendations,
+)
 
 router = DefaultRouter()
 
-router.register("categories", CategoryViewSet)
-router.register("destinations", DestinationViewSet)
+router.register("categories", CategoryViewSet, basename="category")
+router.register("destinations", DestinationViewSet, basename="destination")
 
-urlpatterns = router.urls
+urlpatterns = [
+    path("recommendations/", recommendations, name="recommendations"),
+] + router.urls
