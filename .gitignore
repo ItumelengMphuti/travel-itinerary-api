@@ -1,26 +1,9 @@
-# Virtual environment
 venv/
-
-# Python
 __pycache__/
-*.py[cod]
-
-# Django
+*.pyc
 db.sqlite3
-
-# Environment variables
 .env
-
-# User uploaded files
 media/
-
-# Testing
 .pytest_cache/
 .coverage
 htmlcov/
-
-# IDE
-.vscode/
-.idea/
-
-.postman
